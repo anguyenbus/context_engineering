@@ -104,9 +104,9 @@ Splitting up context to handle complex tasks.
 
 **Key Takeaway:** Specialized agents outperform generalists by 90%.
 
-## Business Guides
+## Documentation
 
-Business-friendly explanations of each notebook are available in the `docs/` folder:
+Detailed guides for each notebook are available in the `docs/` folder:
 
 - [Overview Guide](docs/overview-guide.md) — Complete context engineering overview
 - [Notebook 1 Guide](docs/notebook-1-guide.md) — Writing Context
