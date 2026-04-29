@@ -1,140 +1,153 @@
-# 🧱 Context Engineering with LangGraph 
+# Context Engineering with LangGraph
 
-Agents need context (e.g., instructions, external knowledge, tool feedback) to perform tasks. Context engineering is the art and science of filling the context window with just the right information at each step of an agent’s trajectory. This repository has a set of notebooks in the `context_engineering` folder that cover different strategies for context engineering, including **write, select, compress, and isolate**. For each, we explain how LangGraph is designed to support it with examples. 
+Strategies for managing AI context: **write, select, compress, and isolate**.
 
-<img width="1231" height="448" alt="Screenshot 2025-07-13 at 2 57 28 PM" src="https://github.com/user-attachments/assets/8e7b59e0-4bb0-48f6-aeba-2d789ada55e3" />
+## Overview
 
-## 🚀 Quickstart 
+AI systems have limited "working memory" (context windows). When tasks get complex, they forget important information, costs explode, and accuracy suffers.
+
+**Context Engineering** is the art and science of filling the context window with just the right information at each step.
+
+> "Context engineering is the delicate art and science of filling the context window with just the right information for the next step." — Andrej Karpathy
+
+## What You'll Learn
+
+| Strategy | Problem | Solution |
+|----------|---------|----------|
+| **Write** | AI forgets between steps | State objects & memory stores |
+| **Select** | Too much irrelevant data | Tool & memory selection |
+| **Compress** | Conversations hit limits | Summarization techniques |
+| **Isolate** | One AI can't do everything | Multi-agent systems |
+
+## Quickstart
 
 ### Prerequisites
-- Python 3.9 or higher
+
+- Python 3.10+
 - [uv](https://docs.astral.sh/uv/) package manager
-- [Deno](https://docs.deno.com/runtime/getting_started/installation/) required for the sandboxed environment in the `4_isolate_context.ipynb` notebook
+- OpenAI API key
 
 ### Installation
-1. Clone the repository and activate a virtual environment:
+
 ```bash
-git clone https://github.com/langchain-ai/context_engineering
+# Clone the repository
+git clone https://github.com/anguyenbus/context_engineering
 cd context_engineering
+
+# Create virtual environment
 uv venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install dependencies
+uv sync
 ```
 
-2. Install dependencies:
+### Configuration
+
+Create a `.env` file in the project root:
+
 ```bash
-uv pip install -r requirements.txt
+OPENAI_API_KEY=your-openai-api-key
 ```
 
-3. Set up environment variables for the model provider(s) you want to use:
-```bash
-export OPENAI_API_KEY="your-openai-api-key"
-export ANTHROPIC_API_KEY="your-anthropic-api-key"
-```
-
-4. You can then run the notebooks in the `context_engineering` folder:
+## Notebooks
 
 ```
 context_engineering/
-├── 1_write_context.ipynb      # Examples of saving context externally
-├── 2_select_context.ipynb     # Examples of retrieving relevant context
-├── 3_compress_context.ipynb   # Examples of context compression techniques
-└── 4_isolate_context.ipynb    # Examples of context isolation methods
+├── 1_write_context.ipynb      # State, checkpointing, long-term memory
+├── 2_select_context.ipynb     # Memory retrieval, tool selection, RAG
+├── 3_compress_context.ipynb   # Summarization, token optimization
+└── 4_isolate_context.ipynb    # Multi-agent systems, sandboxing
 ```
 
-## 📚 Background 
-
-As Andrej Karpathy puts it, LLMs are like a [new kind of operating system](https://www.youtube.com/watch?si=-aKY-x57ILAmWTdw&t=620&v=LCEmiRjPEtQ&feature=youtu.be). The LLM is like the CPU and its [context window](https://docs.anthropic.com/en/docs/build-with-claude/context-windows) is like the RAM, serving as the model’s working memory. Just like RAM, the LLM context window has limited [capacity](https://lilianweng.github.io/posts/2023-06-23-agent/) to handle various sources of context. And just as an operating system curates what fits into a CPU’s RAM, we can think about “context engineering” playing a similar role. [Karpathy summarizes this well](https://x.com/karpathy/status/1937902205765607626):
-
-> [Context engineering is the] ”…delicate art and science of filling the context window with just the right information for the next step.”
-
-What are the types of context that we need to manage when building LLM applications? We can think of context engineering as an [umbrella](https://x.com/dexhorthy/status/1933283008863482067) that applies across a few different context types:
-
-- **Instructions** – prompts, memories, few‑shot examples, tool descriptions, etc
-- **Knowledge** – facts, memories, etc
-- **Tools** – feedback from tool calls
-
-## Agent Challenges
-
-However, long-running tasks and accumulating feedback from tool calls mean that agents often utilize a large number of tokens. This can cause numerous problems: it can [exceed the size of the context window](https://cognition.ai/blog/kevin-32b), balloon cost / latency, or degrade agent performance. Drew Breunig [nicely outlined](https://www.dbreunig.com/2025/06/22/how-contexts-fail-and-how-to-fix-them.html) a number of specific ways that longer context can cause perform problems. 
-
-With this in mind, [Cognition](https://cognition.ai/blog/dont-build-multi-agents) called out the importance of context engineering with agents:
-
-> “Context engineering” … is effectively the #1 job of engineers building AI agents.
-
-[Anthropic](https://www.anthropic.com/engineering/built-multi-agent-research-system) also laid it out clearly:
-
-> *Agents often engage in conversations spanning hundreds of turns, requiring careful context management strategies.*
->
-
-## Context Engineering Strategies
-
-In this repo, we cover some common strategies — write, select, compress, and isolate — for agent context engineering by reviewing various popular agents and papers. We then explain how LangGraph is designed to support them!
-
-* **Writing context** - saving it outside the context window to help an agent perform a task.
-* **Selecting context** - pulling it into the context window to help an agent perform a task.
-* **Compressing context** - retaining only the tokens required to perform a task.
-* **Isolating context** - splitting it up to help an agent perform a task.
-
 ### 1. Write Context
-**Description**: Saving information outside the context window to help an agent perform a task.
 
-### 📚 **What's Covered in [1_write_context.ipynb](context_engineering/1_write_context.ipynb)**
-- **Scratchpads in LangGraph**: Using state objects to persist information during agent sessions
-  - StateGraph implementation with TypedDict for structured data
-  - Writing context to state and accessing it across nodes
-  - Checkpointing for fault tolerance and pause/resume workflows
-- **Memory Systems**: Long-term persistence across multiple sessions
-  - InMemoryStore for storing memories with namespaces
-  - Integration with checkpointing for comprehensive memory management
-  - Examples of storing and retrieving jokes with user context
+Saving information outside the context window to help an agent perform a task.
 
-## 2. Select Context
-**Description**: Pulling information into the context window to help an agent perform a task.
+**Topics:**
+- State objects for multi-step workflows
+- Checkpointing for fault tolerance
+- Long-term memory with InMemoryStore
 
-### 📚 **What's Covered in [2_select_context.ipynb](context_engineering/2_select_context.ipynb)**
-- **Scratchpad Selection**: Fetching specific context from agent state
-  - Selective state access in LangGraph nodes
-  - Multi-step workflows with context passing between nodes
-- **Memory Retrieval**: Selecting relevant memories for current tasks
-  - Namespace-based memory retrieval
-  - Context-aware memory selection to avoid irrelevant information
-- **Tool Selection**: RAG-based tool retrieval for large tool sets
-  - LangGraph Bigtool library for semantic tool search
-  - Embedding-based tool description matching
-  - Examples with math library functions and semantic retrieval
-- **Knowledge Retrieval**: RAG implementation for external knowledge
-  - Vector store creation with document splitting
-  - Retriever tools integrated with LangGraph agents
-  - Multi-turn conversations with context-aware retrieval
+**Key Takeaway:** Give AI a scratchpad to write down intermediate results.
 
-## 3. Compress Context
-**Description**: Retaining only the tokens required to perform a task.
+### 2. Select Context
 
-### 📚 **What's Covered in [3_compress_context.ipynb](context_engineering/3_compress_context.ipynb)**
-- **Conversation Summarization**: Managing long agent trajectories
-  - End-to-end conversation summarization after task completion
-  - Token usage optimization (demonstrated reduction from 115k to 60k tokens)
-- **Tool Output Compression**: Reducing token-heavy tool responses
-  - Summarization of RAG retrieval results
-  - Integration with LangGraph tool nodes
-  - Practical examples with blog post retrieval and summarization
-- **State-based Compression**: Using LangGraph state for context management
-  - Custom state schemas with summary fields
-  - Conditional summarization based on context length
+Pulling relevant information into the context window.
 
-## 4. Isolate Context
-**Description**: Splitting up context to help an agent perform a task.
+**Topics:**
+- Memory selection (namespace-based retrieval)
+- Tool selection strategies (direct, categorization, semantic search)
+- RAG for knowledge retrieval
 
-### 📚 **What's Covered in [4_isolate_context.ipynb](context_engineering/4_isolate_context.ipynb)**
-- **Multi-Agent Systems**: Separating concerns across specialized agents
-  - Supervisor architecture for task delegation
-  - Specialized agents with isolated context windows (math expert, research expert)
-  - LangGraph Supervisor library implementation
-- **Sandboxed Environments**: Isolating context in execution environments
-  - PyodideSandboxTool for secure code execution
-  - State isolation outside the LLM context window
-  - Examples of context storage in sandbox variables
-- **State-based Isolation**: Using LangGraph state schemas for context separation
-  - Structured state design for selective context exposure
-  - Field-based isolation within agent state objects
+**Key Takeaway:** Choose only what's relevant — 95% cost reduction possible.
 
+### 3. Compress Context
+
+Retaining only the tokens required to perform a task.
+
+**Topics:**
+- Conversation summarization (115k → 60k tokens demonstrated)
+- Tool output compression
+- Message trimming strategies
+
+**Key Takeaway:** Summarize periodically for longer conversations.
+
+### 4. Isolate Context
+
+Splitting up context to handle complex tasks.
+
+**Topics:**
+- Multi-agent systems with supervisor pattern
+- Specialized agents (research, math, writing)
+- Sandbox execution for safety
+
+**Key Takeaway:** Specialized agents outperform generalists by 90%.
+
+## Business Guides
+
+Business-friendly explanations of each notebook are available in the `docs/` folder:
+
+- [Overview Guide](docs/overview-guide.md) — Complete context engineering overview
+- [Notebook 1 Guide](docs/notebook-1-guide.md) — Writing Context
+- [Notebook 2 Guide](docs/notebook-2-guide.md) — Selecting Context
+- [Notebook 3 Guide](docs/notebook-3-guide.md) — Compressing Context
+- [Notebook 4 Guide](docs/notebook-4-guide.md) — Isolating Context
+
+## Dependencies
+
+This project uses:
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| langgraph | >=1.0.10 | Agent orchestration |
+| langchain | >=0.3.0 | Core LangChain functionality |
+| langchain-core | >=1.0.0 | Core abstractions |
+| langchain-openai | >=0.2.0 | OpenAI integration |
+| langchain-anthropic | >=0.3.0 | Anthropic integration |
+
+See [pyproject.toml](pyproject.toml) for full dependencies.
+
+## Compatibility Notes
+
+**Not included** (incompatible with LangGraph 1.x):
+- `langgraph-bigtool` — Use native tool selection instead
+- `langchain-sandbox` — Use subprocess-based sandboxing instead
+
+## Background
+
+As LLMs become more like operating systems, the context window is the RAM — limited working memory that must be carefully managed.
+
+According to [Cognition](https://cognition.ai/blog/dont-build-multi-agents):
+
+> "Context engineering" is effectively the #1 job of engineers building AI agents.
+
+## Resources
+
+- [LangGraph Documentation](https://langchain-ai.github.io/langgraph/)
+- [Anthropic: Building a Multi-Agent Research System](https://www.anthropic.com/engineering/built-multi-agent-research-system)
+- [Context Window Management](https://www.dbreunig.com/2025/06/22/how-contexts-fail-and-how-to-fix-them.html)
+
+## License
+
+MIT
