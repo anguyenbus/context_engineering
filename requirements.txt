@@ -29,3 +29,6 @@ rich>=14.0.0
 # Jupyter notebook support
 jupyter>=1.0.0
 ipykernel>=6.20.0
+
+# Environment configuration
+python-dotenv>=1.0.0

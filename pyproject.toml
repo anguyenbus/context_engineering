@@ -1,0 +1,48 @@
+[project]
+name = "context-engineering"
+version = "0.1.0"
+description = "Context engineering strategies with LangGraph"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    # Core LangGraph and LangChain
+    "langgraph>=1.0.10",
+    "langchain-core>=1.0.0",
+    "langchain-openai>=0.2.0",
+    "langchain-anthropic>=0.3.0",
+    "langchain-anthropic>=0.3.0",
+    # langgraph-bigtool>=0.0.3,  # Incompatible with langgraph>=1.0.10
+    "langchain-community>=0.3.27",
+    "langgraph-supervisor>=0.0.27",
+    "langgraph-swarm>=0.0.12",
+    # Security: transitive dependency version floors
+    "langgraph-checkpoint>=4.0.0",
+    "aiohttp>=3.13.4",
+    "anthropic>=0.87.0",
+    "Pygments>=2.20.0",
+    # Data validation and type checking
+    "pydantic>=2.0.0",
+    # Optional dependencies for examples
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "matplotlib>=3.7.0",
+    "httpx>=0.24.0",
+    "rich>=14.0.0",
+    # Jupyter notebook support
+    "jupyter>=1.0.0",
+    "ipykernel>=6.20.0",
+    # Environment configuration
+    "python-dotenv>=1.0.0",
+]
+
+[dependency-groups]
+# Note: langchain-sandbox requires langchain-core<0.4.0, incompatible with langgraph>=1.0.10
+# Install separately with: uv pip install "langchain-core<0.4.0" "langchain-sandbox>=0.0.6"
+# Only needed for 4_isolate_context.ipynb
+
+[tool.hatch.build.targets.wheel]
+packages = ["context_engineering"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
