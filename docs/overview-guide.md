@@ -35,12 +35,12 @@ Think of it as teaching an AI to:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                  CONTEXT ENGINEERING                       │
-│                                                              │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐        │
-│  │   WRITE     │  │   SELECT    │  │  COMPRESS   │        │
-│  │  Context    │  │  Context    │  │  Context    │        │
-│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘        │
+│                  CONTEXT ENGINEERING                        │
+│                                                             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          │
+│  │   WRITE     │  │   SELECT    │  │  COMPRESS   │          │
+│  │  Context    │  │  Context    │  │  Context    │          │
+│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘          │
 │         │                │                │                 │
 │         └────────────────┼────────────────┘                 │
 │                          ↓                                  │
@@ -73,11 +73,11 @@ LangGraph's **State** object serves as the scratchpad:
 ```
 ┌─────────────────────────────────────────────────────┐
 │                    STATE (Scratchpad)               │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐ │
-│  │   Input     │  │  Research   │  │   Output    │ │
-│  │  "cats"     │  │  [...data]  │  │  "Why do    │ │
-│  │             │  │             │  │   cats..."   │ │
-│  └─────────────┘  └─────────────┘  └─────────────┘ │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │
+│  │   Input     │  │  Research   │  │   Output    │  │
+│  │  "cats"     │  │  [...data]  │  │  "Why do    │  │
+│  │             │  │             │  │   cats..."  │  │
+│  └─────────────┘  └─────────────┘  └─────────────┘  │
 └─────────────────────────────────────────────────────┘
          ↓                    ↓                    ↓
     Nodes READ from    Nodes WRITE to     Shared across
@@ -197,10 +197,10 @@ Split complex problems into specialized parts. Each part has its own context and
                    │
       ┌────────────┼────────────┐
       │            │            │
-  ┌───▼────┐  ┌───▼────┐  ┌───▼────┐
+  ┌───▼─────┐  ┌───▼────┐  ┌───▼────┐
   │ RESEARCH│  │  MATH  │  │WRITING │
   │ EXPERT  │  │ EXPERT │  │ EXPERT │
-  └─────────┘  └─────────┘  └─────────┘
+  └─────────┘  └────────┘  └────────┘
 
 Each agent: Specialized tools, focused context, domain expertise
 ```
@@ -227,18 +227,18 @@ Parallel:   All tasks at once     = 1 minute
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│              COMPLETE CONTEXT ENGINEERING SYSTEM             │
-│                                                              │
+│              COMPLETE CONTEXT ENGINEERING SYSTEM            │
+│                                                             │
 │  1. WRITE: Store conversation in state                      │
 │     └→ Each turn builds on previous                         │
-│                                                              │
-│  2. SELECT: Choose relevant tools per query                  │
+│                                                             │
+│  2. SELECT: Choose relevant tools per query                 │
 │     └→ Billing tools for refund, shipping for tracking      │
-│                                                              │
+│                                                             │
 │  3. COMPRESS: Summarize every 10 turns                      │
 │     └→ Keep essential info, drop details                    │
-│                                                              │
-│  4. ISOLATE: Different agents for different domains          │
+│                                                             │
+│  4. ISOLATE: Different agents for different domains         │
 │     └→ Billing agent, tech support, sales, etc.             │
 └─────────────────────────────────────────────────────────────┘
 ```
