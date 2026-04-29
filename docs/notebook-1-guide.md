@@ -1,5 +1,5 @@
 # Context Engineering: Writing Context
-## Business Leader's Guide to Notebook 1
+## Guide to Notebook 1
 
 ---
 
@@ -7,7 +7,7 @@
 
 **The Problem:** AI systems have limited "working memory." When tasks get complex, they forget important information.
 
-**The Solution:** "Context Engineering" — giving AI a way to take notes and remember things across tasks, just like humans do.
+**The Solution:** "Context Engineering" — giving AI a way to take notes and remember things across tasks.
 
 **The Impact:** More reliable AI, better results on complex tasks, reduced costs (fewer unnecessary API calls).
 
@@ -31,13 +31,13 @@ Think about how you work:
 
 ## The Core Challenge
 
-Imagine asking an employee to:
+Imagine asking an assistant to:
 1. Research a competitor
 2. Write a summary
 3. Create a presentation
 4. Present to stakeholders
 
-If they had to redo the research for steps 2, 3, and 4, you'd fire them. But that's how basic AI systems work — each call starts fresh.
+If they had to redo the research for steps 2, 3, and 4, that would be inefficient. But that's how basic AI systems work — each call starts fresh.
 
 ---
 
@@ -61,10 +61,10 @@ AI agents need the same capability. LangGraph's **State** object is that scratch
 ```
 ┌─────────────────────────────────────────────────────┐
 │                    STATE (Scratchpad)               │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │
-│  │   Topic     │  │    Joke     │  │  Summary    │  │
-│  │  "cats"     │  │  "Why don't │  │  (optional) │  │
-│  └─────────────┘  └─────────────┘  └─────────────┘  │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐ │
+│  │   Topic     │  │    Joke     │  │  Summary    │ │
+│  │  "cats"     │  │  "Why don't │  │  (optional) │ │
+│  └─────────────┘  └─────────────┘  └─────────────┘ │
 └─────────────────────────────────────────────────────┘
          ↓                    ↓                    ↓
     Nodes READ from    Nodes WRITE to     Shared across
@@ -85,7 +85,7 @@ User → LLM → Joke → Saved to State → Can be used later
 
 ---
 
-## Real-World Business Applications
+## Practical Applications
 
 ### Customer Support Agent
 
@@ -146,7 +146,7 @@ Running workflow...
 [Resume] ✓ Continue from outline
 ```
 
-**Business value:**
+**Value:**
 - Fault tolerance
 - Pause and review
 - Human-in-the-loop approval
@@ -164,14 +164,14 @@ Session 2: "I remember you like concise answers"
 Session 3: Still remembers preference
 ```
 
-**Business value:**
+**Value:**
 - Personalized experiences
 - Avoids repetitive questions
 - Builds user rapport
 
 ---
 
-## Why This Matters for Your Business
+## Why This Matters
 
 ### Cost Savings
 
@@ -192,7 +192,7 @@ With context engineering:
 → Done correctly every time.
 ```
 
-### Better Customer Experience
+### Better Experience
 
 ```
 Bad AI (no memory):
@@ -209,13 +209,13 @@ AI: "Got it, I'm looking at order #123 now. What's the issue?"
 
 ## Key Takeaways
 
-| Concept | Analogy | Business Value |
-|---------|---------|----------------|
+| Concept | Analogy | Value |
+|---------|---------|-------|
 | **State** | Scratchpad | Keep info across workflow steps |
 | **Checkpointing** | Save file | Resume after failures |
 | **Store** | Database | Remember across sessions |
 
-**Context Engineering = teaching AI to take notes and remember things, just like smart humans do.**
+**Context Engineering = teaching AI to take notes and remember things.**
 
 ---
 
@@ -223,7 +223,7 @@ AI: "Got it, I'm looking at order #123 now. What's the issue?"
 
 1. **Where do our current AI systems forget important context?**
 2. **What workflows would benefit from multi-step memory?**
-3. **What customer information should our AI remember across sessions?**
+3. **What information should our AI remember across sessions?**
 4. **How much are we wasting on re-sending the same context repeatedly?**
 
 ---

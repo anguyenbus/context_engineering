@@ -1,5 +1,5 @@
 # Context Engineering: Compressing Context
-## Business Leader's Guide to Notebook 3
+## Guide to Notebook 3
 
 ---
 
@@ -46,8 +46,8 @@ Problems:
 ```
 
 **Real-world impact:**
-- A customer support chat with 20 back-and-forths could cost $5-10
-- A long research session might hit the model's token limit
+- A support chat with 20 back-and-forths could cost $5-10
+- A research session might hit the model's token limit
 - Multi-step workflows become impractical
 
 ---
@@ -74,7 +74,7 @@ Problems:
 └─────────────────────────────────────────────────────┘
 ```
 
-**Business example:**
+**Example:**
 
 *Customer support conversation:*
 ```
@@ -116,7 +116,7 @@ Savings: 90% tokens, same essential information
 └─────────────────────────────────────────────────────┘
 ```
 
-**Business example:**
+**Example:**
 
 *Research agent searching knowledge base:*
 ```
@@ -135,8 +135,8 @@ Result: 96% cost reduction, 5x faster
 ```
 
 **From the notebook:**
-- Without tool summarization: **115,000 tokens** (~$3.50)
-- With tool summarization: **60,000 tokens** (~$1.80)
+- Without tool summarization: **115,000 tokens**
+- With tool summarization: **60,000 tokens**
 - Savings: **48% reduction**
 
 ---
@@ -167,7 +167,7 @@ Result: 96% cost reduction, 5x faster
 
 ---
 
-## Why This Matters for Your Business
+## Why This Matters
 
 ### Direct Cost Savings
 

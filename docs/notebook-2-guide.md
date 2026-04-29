@@ -1,5 +1,5 @@
 # Context Engineering: Selecting Context
-## Business Leader's Guide to Notebook 2
+## Guide to Notebook 2
 
 ---
 
@@ -19,9 +19,9 @@ Think about a reference librarian:
 
 | Librarian | AI System |
 |-----------|-----------|
-| Doesn't read the entire library when you ask a question | Shouldn't need all data to answer a query |
-| Selects relevant books based on your topic | Needs mechanism to select relevant context |
-| Brings you exactly what you need | Should retrieve only pertinent information |
+| Doesn't read the entire library when you ask | Shouldn't need all data to answer |
+| Selects relevant books based on topic | Needs mechanism to select relevant context |
+| Brings exactly what you need | Should retrieve only pertinent information |
 
 **Context Selection** = choosing the right subset of information from a larger pool.
 
@@ -62,7 +62,7 @@ Imagine an AI assistant with access to:
 └─────────────────────────────────────────────────────┘
 ```
 
-**Business use case:** Multi-step content creation
+**Use case:** Multi-step content creation
 - Draft → Review → Revise → Finalize
 - Each step reads previous work from state
 
@@ -84,12 +84,12 @@ Imagine an AI assistant with access to:
     Search by key        Search by topic     Semantic search
 ```
 
-**Business use cases:**
-- **Personalization:** Remember user preferences across sessions
+**Use cases:**
+- **Personalization:** Remember preferences across sessions
 - **Consistency:** Avoid repeating the same mistakes
 - **Learning:** Build up knowledge over time
 
-**Example from notebook:**
+**Example:**
 ```
 Session 1: AI generates joke about cats
            ↓ Stored in memory
@@ -105,7 +105,7 @@ Session 2: AI reads previous joke first
 
 **The tool overload problem:**
 ```
-AI with 500 tools available:
+AI with 500 tools:
 - Gets confused about which to use
 - Spends tokens processing tool descriptions
 - Makes wrong choices
@@ -115,15 +115,15 @@ AI with 500 tools available:
 
 | Approach | Tool Count | Method | Example |
 |----------|------------|--------|---------|
-| **Direct binding** | < 50 | Give AI all tools, let it choose | Small business dashboard |
+| **Direct binding** | < 50 | Give AI all tools, let it choose | Small dashboard |
 | **Categorization** | 50-200 | Group by domain, select category | Department-specific tools |
-| **Semantic search** | 200+ | Search tool descriptions | Enterprise tool catalog |
+| **Semantic search** | 200+ | Search tool descriptions | Enterprise catalog |
 
-**Business example:**
+**Example:**
 
 *Direct binding* (small tool set):
 ```
-Customer service agent with 5 tools:
+Agent with 5 tools:
 - Look up order
 - Process refund
 - Check inventory
@@ -137,17 +137,15 @@ Customer service agent with 5 tools:
 ```
 Query: "Help with my refund"
 → Select: billing_tools only
-→ AI sees: [process_refund, check_status, refund_history]
 
 Query: "Where's my package?"
-→ Select: shipping_tools only  
-→ AI sees: [track_package, schedule_delivery, change_address]
+→ Select: shipping_tools only
 ```
 
 *Semantic search* (large tool set):
 ```
 Query: "Calculate monthly recurring revenue"
-→ Search finds: [revenue_tools, finance_tools, analytics_tools]
+→ Search finds relevant tools
 → AI gets only relevant subset
 ```
 
@@ -161,17 +159,17 @@ Query: "Calculate monthly recurring revenue"
 ┌─────────────────────────────────────────────────────┐
 │                    RAG FLOW                         │
 │                                                      │
-│  User Question → Search documents                    │
-                      ↓                                │
-              Find relevant chunks                     │
-                      ↓                                │
-              Add to AI context                        │
-                      ↓                                │
-              AI answers using retrieved info          │
+│  Question → Search documents                        │
+│                  ↓                                  │
+│              Find relevant chunks                    │
+│                  ↓                                  │
+│              Add to AI context                        │
+│                  ↓                                  │
+│              AI answers using retrieved info        │
 └─────────────────────────────────────────────────────┘
 ```
 
-**Business value:**
+**Value:**
 
 | Without RAG | With RAG |
 |-------------|----------|
@@ -179,28 +177,28 @@ Query: "Calculate monthly recurring revenue"
 | "I don't know about our products" | "Here's our product catalog..." |
 | Hallucinates answers | Grounded in actual documents |
 
-**Real-world applications:**
-- **Customer support:** Search knowledge base for relevant help articles
+**Applications:**
+- **Support:** Search knowledge base for help articles
 - **Legal:** Find relevant cases and precedents
 - **Research:** Retrieve papers on specific topics
-- **HR:** Answer questions about policies and benefits
+- **HR:** Answer questions about policies
 
 ---
 
-## Why This Matters for Your Business
+## Why This Matters
 
 ### Cost Reduction
 
 | Scenario | Without Selection | With Selection | Savings |
 |----------|-------------------|----------------|---------|
-| Customer support query | 100,000 tokens (all docs) | 5,000 tokens (relevant docs) | 95% |
-| Employee HR question | 50,000 tokens (policy manual) | 3,000 tokens (relevant sections) | 94% |
+| Support query | 100,000 tokens | 5,000 tokens | 95% |
+| HR question | 50,000 tokens | 3,000 tokens | 94% |
 
 ### Improved Accuracy
 
 ```
 Too much context:
-AI: "I found information about returns in 12 different documents.
+AI: "I found information in 12 different documents.
      Here are conflicting policies..." (confused)
 
 Selected context:
@@ -208,17 +206,17 @@ AI: "According to our return policy (section 4.2), you have
      30 days to return items in original condition." (clear)
 ```
 
-### Better User Experience
+### Better Experience
 
 ```
 Without selection:
 User: "What's our refund policy?"
-AI: [30 second delay processing entire knowledge base]
+AI: [30 second delay]
 AI: "Here's everything I found..." (overwhelming)
 
 With selection:
 User: "What's our refund policy?"
-AI: [2 second delay, found relevant section]
+AI: [2 second delay]
 AI: "You have 30 days for most items..." (concise)
 ```
 
@@ -226,8 +224,8 @@ AI: "You have 30 days for most items..." (concise)
 
 ## Key Takeaways
 
-| Strategy | When to Use | Business Benefit |
-|----------|-------------|------------------|
+| Strategy | When to Use | Benefit |
+|----------|-------------|--------|
 | **Scratchpad selection** | Multi-step workflows | Each step builds on previous work |
 | **Memory selection** | Cross-session persistence | Personalized, consistent experiences |
 | **Tool selection** | Many tools available | Faster, more accurate tool use |
@@ -240,7 +238,7 @@ AI: "You have 30 days for most items..." (concise)
 ## Questions for Discussion
 
 1. **What information do our AI systems currently process that could be filtered out?**
-2. **Where would tool selection improve our AI's accuracy?**
+2. **Where would tool selection improve accuracy?**
 3. **What knowledge should be retrievable (RAG) vs. stored in memory?**
 4. **How much could we save by selecting only relevant context?**
 

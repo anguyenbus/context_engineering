@@ -1,5 +1,5 @@
 # Context Engineering: Complete Guide
-## Business Leader's Overview
+## Overview
 
 ---
 
@@ -91,7 +91,7 @@ LangGraph's **State** object serves as the scratchpad:
 | **Short-term** | Resume after failures | Single workflow | Pause & approve |
 | **Long-term** | Remember across sessions | Permanent | User preferences |
 
-### Business Value
+### Value
 
 | Without Write Context | With Write Context |
 |-----------------------|-------------------|
@@ -127,7 +127,7 @@ AI with 500 tools:
 Solution: Select only relevant tools per query
 ```
 
-### Business Value
+### Value
 
 | Without Selection | With Selection |
 |-------------------|----------------|
@@ -162,7 +162,7 @@ From the notebooks:
 | RAG query | 115,000 tokens | 60,000 tokens | 48% |
 | Long chat | 50,000 tokens | 5,000 tokens | 90% |
 
-### Business Value
+### Value
 
 ```
 Before: "This conversation is too long, I can't continue"
@@ -205,7 +205,7 @@ Split complex problems into specialized parts. Each part has its own context and
 Each agent: Specialized tools, focused context, domain expertise
 ```
 
-### Business Value
+### Value
 
 According to Anthropic's research:
 
@@ -316,7 +316,7 @@ A: Start with what solves your biggest problem:
 - High costs? → Start with Select or Compress
 - Complex tasks failing? → Start with Isolate
 
-**Q: What's the ROI?**
+**Q: What's the impact?**
 
 A: Typical savings:
 - 50-95% cost reduction (fewer tokens)
@@ -349,7 +349,7 @@ A:
 
 ## Summary
 
-| Strategy | Problem It Solves | Business Impact |
+| Strategy | Problem It Solves | Impact |
 |----------|-------------------|-----------------|
 | **Write** | AI forgets between steps | Multi-step workflows possible |
 | **Select** | Too much irrelevant data | 50-95% cost reduction |
@@ -360,7 +360,7 @@ A:
 - More capable (handle complex tasks)
 - More efficient (lower costs)
 - More reliable (better accuracy)
-- More scalable (grow with your business)
+- More scalable (grow with usage) |
 
 ---
 
